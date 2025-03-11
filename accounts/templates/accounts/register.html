@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        /* Background Grid */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #0f0f10;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .grid {
+            height: 100vh;
+            width: 100vw;
+            background-image: linear-gradient(to right, #1a1a1a 1px, transparent 1px),
+                              linear-gradient(to bottom, #1a1a1a 1px, transparent 1px);
+            background-size: 1rem 1rem;
+            position: absolute;
+            z-index: -1;
+            filter: blur(1px);
+        }
+
+        /* Big Container */
+        .container {
+            background: #18181b;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 10px 10px 20px #101010, -10px -10px 20px #202020;
+            text-align: center;
+            width: 400px;
+        }
+
+        h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        /* Input Fields with Stronger Glow */
+        .input-wrapper {
+    position: relative;
+    margin: 15px 0;
+    width: 100%;
+}
+
+.input {
+    background-color: #010201;
+    border: none;
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+    color: white;
+    padding-left: 20px;
+    font-size: 16px;
+    position: relative;
+    z-index: 2;
+}
+
+.input::placeholder {
+    color: #c0b9c0;
+}
+
+.input:focus {
+    outline: none;
+}
+
+/* Enhanced Glowing Effect */
+.input-glow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    filter: blur(12px); /* Stronger blur */
+    opacity: 0.9; /* Higher opacity */
+    background-image: conic-gradient(
+        rgba(0, 0, 0, 0) 0%, 
+        #a099d8, 
+        rgba(0, 0, 0, 0) 10%, 
+        rgba(0, 0, 0, 0) 50%, 
+        #df30aa 60%, /* Stronger pink */
+        #3498db 80%, /* Added blue */
+        rgba(0, 0, 0, 0) 100%
+    );
+    transition: transform 0.5s ease-in-out, opacity 0.3s;
+}
+
+.input-wrapper:hover .input-glow {
+    transform: rotate(180deg);
+    opacity: 1; /* Full glow on hover */
+}
+
+/* Optional: Add subtle glow to input fields on focus */
+.input:focus {
+    box-shadow: 0 0 15px rgba(223, 48, 170, 0.7), 0 0 15px rgba(52, 152, 219, 0.7);
+}
+
+/* Glow Animation */
+.input-wrapper:hover .input-glow,
+.input:focus ~ .input-glow {
+    transform: rotate(360deg);
+    opacity: 1;
+}
+
+
+        /* Stylish Button */
+        button {
+            width: 10em;
+            height: 3em;
+            border-radius: 30px;
+            font-size: 16px;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 6px 6px 12px #111, -6px -6px 12px #222;
+            cursor: pointer;
+            background: none;
+            color: white;
+        }
+
+        button::before {
+            content: '';
+            width: 0;
+            height: 100%;
+            border-radius: 30px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-image: linear-gradient(to right, #0fd850 0%, #f9f047 100%);
+            transition: .5s ease;
+            display: block;
+            z-index: -1;
+        }
+
+        button:hover::before {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid"></div>
+    <div class="container">
+        <h2>Register</h2>
+
+<!--         
+        <form method="post">
+            {% csrf_token %}
+        
+            {% if form.errors %}
+                <div style="color: red; background: #ffebee; padding: 10px; border-radius: 5px;">
+                    <strong>Error:</strong>
+                    <ul>
+                        {% for field, errors in form.errors.items %}
+                            {% for error in errors %}
+                                <li>{{ field|title }}: {{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        
+            <div class="input-wrapper">
+                <input type="text" name="username" placeholder="Username" class="input" required>
+            </div>
+            <div class="input-wrapper">
+                <input type="email" name="email" placeholder="Email" class="input" required>
+            </div>
+            <div class="input-wrapper">
+                <input type="password" name="password1" placeholder="Password" class="input" required>
+            </div>
+            <div class="input-wrapper">
+                <input type="password" name="password2" placeholder="Confirm Password" class="input" required>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+         -->
+        
+
+         <form id="register-form">
+            {% csrf_token %}
+            
+            <div id="error-messages" style="color: red; background: #ffebee; padding: 10px; border-radius: 5px; display: none;"></div>
+        
+            <div class="input-wrapper">
+                <input type="text" name="username" id="username" placeholder="Username" class="input" required>
+            </div>
+            <div class="input-wrapper">
+                <input type="email" name="email" id="email" placeholder="Email" class="input" required>
+            </div>
+            <div class="input-wrapper">
+                <input type="password" name="password1" id="password1" placeholder="Password" class="input" required>
+            </div>
+            <div class="input-wrapper">
+                <input type="password" name="password2" id="password2" placeholder="Confirm Password" class="input" required>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+        
+        <script>
+        document.getElementById("register-form").addEventListener("submit", function(event) {
+            event.preventDefault();  // Stop normal form submission
+        
+            let formData = new FormData(this);  // Get form data
+            let errorDiv = document.getElementById("error-messages");
+            
+            fetch("{% url 'register' %}", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest"  // Mark request as AJAX
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = data.redirect_url;  // Redirect on success
+                } else {
+                    errorDiv.innerHTML = "<strong>Error:</strong><ul>";
+                    for (let field in data.errors) {
+                        data.errors[field].forEach(error => {
+                            errorDiv.innerHTML += `<li>${field}: ${error}</li>`;
+                        });
+                    }
+                    errorDiv.innerHTML += "</ul>";
+                    errorDiv.style.display = "block";  // Show error messages
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        });
+        </script>
+        
+
+
+
+    </div>
+</body>
+</html>

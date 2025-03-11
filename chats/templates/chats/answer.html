@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Bot Answer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        
+        /* Chat Bot Container */
+        .chat-container {
+            position: relative;
+            max-width: 800px;
+            width: 100%;
+            padding: 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .chat-container::before {
+            content: '';
+            position: absolute;
+            right: -120px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 80px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+       
+
+        /* Text Area Fix */
+        .response-area {
+            max-height: 200px;
+            overflow-y: auto;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="chat-container">
+        <h1 class="text-xl font-bold mb-4 text-gray-800">Chat Bot Answer:</h1>
+        <div class="mb-6">
+            <p class="text-sm text-gray-500 mb-2">Your prompt:</p>
+            <div class="bg-gray-100 p-4 rounded-lg border border-gray-300 text-gray-700">
+                <pre>{{ prompt }}</pre>
+            </div>
+        </div>
+        <div class="mb-6">
+            <p class="text-sm text-gray-500 mb-2">Bot's response:</p>
+            <div class="bg-gray-100 p-4 rounded-lg border border-gray-300 text-gray-700 response-area">
+                <pre>{{ answer }}</pre>
+            </div>
+        </div>
+        <a href="/chats" class="inline-block px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+            Ask Another Question
+        </a>
+    </div>
+
+</body>
+</html>

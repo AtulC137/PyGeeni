@@ -1,0 +1,5 @@
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}  <!-- Django auto-generates the login form -->
+    <button type="submit">Login</button>
+</form>
